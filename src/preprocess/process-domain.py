@@ -34,6 +34,7 @@ def main():
 
     for key, value in domain_map.items():
         value.sort(key=itemgetter(1))
+
         out = open(os.path.join(output_dir, "chr" + key + "-domainlist.txt"), "w")
         out2 = open(os.path.join(output_dir_merged, "chr" + key + "-domainlist-merged.txt"), "w")
         out3 = open(os.path.join(output_dir_mapped, "chr" + key + "-domainlist-mapped.txt"), "w")
@@ -80,6 +81,8 @@ def main():
             # prev_value = val[1]
             i += 1
 
+        calculate_top_nonmerged_domains(key, domain_merge_map, domain_map_internal)
+
         count_val = 0
         cnt = 0
         for k1, v1 in domain_merge_map.items():
@@ -90,7 +93,7 @@ def main():
                 out3.write(" {}".format(t))
             out3.write("\n")
 
-        print(count_val)
+        # print(count_val)
         out.close()
         out2.close()
         out3.close()
@@ -101,6 +104,33 @@ def main():
     #
     # plt.hist(list_range,bins=100)
     # plt.show()
+
+
+def calculate_top_nonmerged_domains(chr, domain_merge_map, domain_map_internal):
+    domain_range_list = []
+
+    for key, value in domain_map_internal.items():
+        domain_range_list.append((key, value[1] - value[0]))
+
+    domain_range_list.sort(key=itemgetter(1), reverse=True)
+
+    top_domain_list = []
+
+    for domain in domain_range_list:
+        if len(domain_merge_map[domain[0]]) == 1:
+            top_domain_list.append(domain[0])
+            if len(top_domain_list) == 5:
+                break
+
+    top_domain_file = "output/domain-data/chrm/top-domains/chr" + chr + "-topdomains.txt"
+    out = open(top_domain_file, "w")
+
+    for i in top_domain_list:
+        out.write("{}\n".format(i))
+
+    out.close()
+
+    # sys.exit(0)
 
 
 if __name__ == '__main__':
