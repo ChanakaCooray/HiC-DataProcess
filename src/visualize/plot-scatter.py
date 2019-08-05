@@ -42,10 +42,8 @@ def main():
 
         # print(label_map)
 
-        # tSNE_output = "output/10kb_resolution_intrachromosomal/chr1/tSNE/deepwalk-tSNE.txt"
-        tSNE_output = "output/10kb_resolution_intrachromosomal/line-output-128/tSNE/" + chrm + "-tSNE.txt"
-        # tSNE_output = "output/10kb_resolution_intrachromosomal/chr1/line-2.emb"
-        # tSNE_output = "output/10kb_resolution_intrachromosomal/chr1/deepwalk-2.embeddings"
+        # tSNE_output = "output/10kb_resolution_intrachromosomal/line-output-128/tSNE/" + chrm + "-tSNE.txt"
+        tSNE_output = "output/10kb_resolution_intrachromosomal/deepwalk-output-128/tSNE/" + chrm + "-tSNE.txt"
 
         X = []
         Y = []
@@ -64,7 +62,8 @@ def main():
         plt.scatter(X, Y, color=col)
         # plt.show()
 
-        plt.savefig("output/graphs-10kb-128dim/line/" + chrm + ".png")
+        # plt.savefig("output/graphs-10kb-128dim/line/" + chrm + ".png")
+        plt.savefig("output/graphs-10kb-128dim/deepwalk/" + chrm + ".png")
 
 
 if __name__ == '__main__':

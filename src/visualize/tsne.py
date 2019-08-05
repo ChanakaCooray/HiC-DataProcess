@@ -10,11 +10,11 @@ def main():
 
     for chr_n in chrm_list:
         chrm = "chr" + str(chr_n)
-        # file = "output/10kb_resolution_intrachromosomal/chr1/deepwalk.embeddings"
-        file = "output/10kb_resolution_intrachromosomal/line-output-128/" + chrm + ".emb"
+        # file = "output/10kb_resolution_intrachromosomal/line-output-128/" + chrm + ".emb"
+        file = "output/10kb_resolution_intrachromosomal/deepwalk-output-128/" + chrm + ".emb"
 
-        # tSNE_output = "output/10kb_resolution_intrachromosomal/chr1/tSNE/deepwalk-tSNE.txt"
-        tSNE_output = "output/10kb_resolution_intrachromosomal/line-output-128/tSNE/" + chrm + "-tSNE.txt"
+        # tSNE_output = "output/10kb_resolution_intrachromosomal/line-output-128/tSNE/" + chrm + "-tSNE.txt"
+        tSNE_output = "output/10kb_resolution_intrachromosomal/deepwalk-output-128/tSNE/" + chrm + "-tSNE.txt"
         out = open(tSNE_output, "w")
 
         bin_list = []
