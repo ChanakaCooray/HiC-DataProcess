@@ -5,55 +5,66 @@ import sys
 
 
 def main():
-    top_domains_file = "output/domain-data/chrm/top-domains/chr1-topdomains.txt"
+    chrm_list = list(range(1, 23))
+    chrm_list.append("X")
 
-    top_domains_map = {}
-    color_list = ["blue", "red", "green", "yellow", "orange"]
+    for chr_n in chrm_list:
+        chrm = "chr" + str(chr_n)
 
-    i = 0
-    with open(top_domains_file) as f:
-        for line in f:
-            top_domains_map[(int(line.rstrip('\n')))] = color_list[i]
-            i += 1
+        top_domains_file = "output/domain-data/chrm/top-domains/" + chrm + "-topdomains.txt"
 
-    # print(top_domains_map)
+        top_domains_map = {}
+        color_list = ["blue", "red", "green", "yellow", "orange"]
 
-    label_file = "output/domain-data/chrm/10kb-bin-labels/chr1-bin-labels.txt"
+        i = 0
+        with open(top_domains_file) as f:
+            for line in f:
+                top_domains_map[(int(line.rstrip('\n')))] = color_list[i]
+                i += 1
 
-    label_map = {}
+        # print(top_domains_map)
 
-    with open(label_file) as f:
-        for line in f:
-            splitLine = line.split()
+        label_file = "output/domain-data/chrm/10kb-bin-labels/" + chrm + "-bin-labels.txt"
 
-            bin = int(splitLine[0])
-            label = abs(int(splitLine[1]))
+        label_map = {}
 
-            if label in top_domains_map:
-                label_map[bin] = top_domains_map[label]
-            else:
-                label_map[bin] = "grey"
+        with open(label_file) as f:
+            for line in f:
+                splitLine = line.split()
 
-    # print(label_map)
+                bin = int(splitLine[0])
+                label = abs(int(splitLine[1]))
 
-    # tSNE_output = "output/10kb_resolution_intrachromosomal/chr1/tSNE/deepwalk-tSNE.txt"
-    tSNE_output = "output/10kb_resolution_intrachromosomal/chr1/tSNE/line-tSNE.txt"
+                if label in top_domains_map:
+                    label_map[bin] = top_domains_map[label]
+                else:
+                    label_map[bin] = "grey"
 
-    X = []
-    Y = []
-    col = []
+        # print(label_map)
 
-    with open(tSNE_output) as f:
-        for line in f:
-            splitLine = line.split()
+        # tSNE_output = "output/10kb_resolution_intrachromosomal/chr1/tSNE/deepwalk-tSNE.txt"
+        tSNE_output = "output/10kb_resolution_intrachromosomal/line-output-128/tSNE/" + chrm + "-tSNE.txt"
+        # tSNE_output = "output/10kb_resolution_intrachromosomal/chr1/line-2.emb"
+        # tSNE_output = "output/10kb_resolution_intrachromosomal/chr1/deepwalk-2.embeddings"
 
-            X.append(float(splitLine[1]))
-            Y.append(float(splitLine[2]))
+        X = []
+        Y = []
+        col = []
 
-            col.append(label_map[int(splitLine[0])])
+        with open(tSNE_output) as f:
+            for line in f:
+                splitLine = line.split()
 
-    plt.scatter(X, Y, color=col)
-    plt.show()
+                X.append(float(splitLine[1]))
+                Y.append(float(splitLine[2]))
+
+                col.append(label_map[int(splitLine[0])])
+
+        plt.figure(figsize=(20, 12))
+        plt.scatter(X, Y, color=col)
+        # plt.show()
+
+        plt.savefig("output/graphs-10kb-128dim/line/" + chrm + ".png")
 
 
 if __name__ == '__main__':

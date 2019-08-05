@@ -2,44 +2,54 @@ import sys
 
 
 def main():
-    rawdata_file = "RAWdata/10kb_resolution_intrachromosomal/chr1/MAPQGE30/chr1_10kb.RAWobserved"
-    norm_file = "RAWdata/10kb_resolution_intrachromosomal/chr1/MAPQGE30/chr1_10kb.KRnorm"
-    bin_size = 10000
-    output_file = "output/10kb_resolution_intrachromosomal/chr1/chr1_10kb.line_output"
+    chrm_list = list(range(1, 23))
+    chrm_list.append("X")
 
-    out = open(output_file, "w")
+    for chr_n in chrm_list:
+        chrm = "chr" + str(chr_n)
 
-    i = 1
-    norm_map = {}
-    with open(norm_file) as f:
-        for line in f:
-            norm_map[i] = line.rstrip('\n')
-            i += 1
+        rawdata_file = "RAWdata/10kb_resolution_intrachromosomal/" + chrm + "/MAPQGE30/" + chrm + "_10kb.RAWobserved"
+        norm_file = "RAWdata/10kb_resolution_intrachromosomal/" + chrm + "/MAPQGE30/" + chrm + "_10kb.KRnorm"
+        bin_size = 10000
+        line_output_file = "output/10kb_resolution_intrachromosomal/line-input/" + chrm + ".output"
+        deepwalk_output_file = "output/10kb_resolution_intrachromosomal/deepwalk-input/" + chrm + ".output"
 
-    print(i)
+        line_out = open(line_output_file, "w")
+        deepwalk_out = open(deepwalk_output_file, "w")
 
-    count = 0
-    with open(rawdata_file) as f:
-        for line in f:
-            splitLine = line.split()
+        i = 1
+        norm_map = {}
+        with open(norm_file) as f:
+            for line in f:
+                norm_map[i] = line.rstrip('\n')
+                i += 1
 
-            bin1 = int(splitLine[0])
-            bin2 = int(splitLine[1])
-            value = float(splitLine[2])
+        print(i)
 
-            index1 = int((bin1 / bin_size) + 1)
-            index2 = int((bin2 / bin_size) + 1)
+        count = 0
+        with open(rawdata_file) as f:
+            for line in f:
+                splitLine = line.split()
 
-            new_value = "NaN"
-            if norm_map[index1] != "NaN" and norm_map[index2] != "NaN":
-                new_value = value / (float(norm_map[index1]) * float(norm_map[index1]))
+                bin1 = int(splitLine[0])
+                bin2 = int(splitLine[1])
+                value = float(splitLine[2])
 
-            if new_value != "NaN":
-                out.write("{} {} {}\n".format(index1, index2, new_value))
-                if index1 != index2:
-                    out.write("{} {} {}\n".format(index2, index1, new_value))
+                index1 = int((bin1 / bin_size) + 1)
+                index2 = int((bin2 / bin_size) + 1)
 
-    out.close()
+                new_value = "NaN"
+                if norm_map[index1] != "NaN" and norm_map[index2] != "NaN":
+                    new_value = value / (float(norm_map[index1]) * float(norm_map[index1]))
+
+                if new_value != "NaN":
+                    line_out.write("{} {} {}\n".format(index1, index2, new_value))
+                    deepwalk_out.write("{} {} {}\n".format(index1, index2, new_value))
+                    if index1 != index2:
+                        line_out.write("{} {} {}\n".format(index2, index1, new_value))
+
+        line_out.close()
+        deepwalk_out.close()
 
 
 if __name__ == '__main__':
