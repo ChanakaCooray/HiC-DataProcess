@@ -25,7 +25,7 @@ def main():
 
         # print(top_domains_map)
 
-        label_file = "output/domain-data/chrm/50kb-bin-labels/" + chrm + "-bin-labels.txt"
+        label_file = "output/domain-data/chrm/100kb-bin-labels/" + chrm + "-bin-labels.txt"
 
         label_map = {}
 
@@ -50,8 +50,8 @@ def main():
 
         # print(label_map)
 
-        # tSNE_output = "output/50kb_resolution_intrachromosomal/line-output-128/tSNE/" + chrm + "-tSNE.txt"
-        tSNE_output = "output/50kb_resolution_intrachromosomal/deepwalk-output-128/tSNE/" + chrm + "-tSNE.txt"
+        # tSNE_output = "output/100kb_resolution_intrachromosomal/line-output-128/tSNE/" + chrm + "-tSNE.txt"
+        tSNE_output = "output/100kb_resolution_intrachromosomal/deepwalk-output-128/tSNE/" + chrm + "-tSNE.txt"
 
         X = []
         Y = []
@@ -70,8 +70,8 @@ def main():
         plt.scatter(X, Y, color=col)
         # plt.show()
 
-        # plt.savefig("output/graphs-50kb-128dim/line/" + chrm + ".png")
-        plt.savefig("output/graphs-50kb-128dim/deepwalk/" + chrm + ".png")
+        # plt.savefig("output/graphs-100kb-128dim/line/" + chrm + ".png")
+        plt.savefig("output/graphs-100kb-128dim/deepwalk/" + chrm + ".png")
 
 
 if __name__ == '__main__':
