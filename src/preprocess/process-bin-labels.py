@@ -8,7 +8,7 @@ from collections import defaultdict
 
 
 def main():
-    bin_size = 10000
+    bin_size = 50000
     # num_bins = 24950
 
     chrm_list = list(range(1, 23))
@@ -19,13 +19,13 @@ def main():
     for chr_n in chrm_list:
         chrm = "chr" + str(chr_n)
 
-        KRNorm_file = "RAWdata/10kb_resolution_intrachromosomal/" + chrm + "/MAPQGE30/" + chrm + "_10kb.KRnorm"
+        KRNorm_file = "RAWdata/50kb_resolution_intrachromosomal/" + chrm + "/MAPQGE30/" + chrm + "_50kb.KRnorm"
 
         num_bins = sum(1 for line in open(KRNorm_file))
 
         domain_file = "output/domain-data/chrm/merged/" + chrm + "-domainlist-merged.txt"
 
-        output_file = "output/domain-data/chrm/10kb-bin-labels/" + chrm + "-bin-labels.txt"
+        output_file = "output/domain-data/chrm/50kb-bin-labels/" + chrm + "-bin-labels.txt"
 
         out = open(output_file, "w")
 
@@ -44,16 +44,28 @@ def main():
         for i in range(0, num_bins):
             start_bin_index = i * bin_size
             end_bin_index = start_bin_index + bin_size
-            label = 0
+            label = []
             for key, value in domain_map.items():
-                if value[0] <= start_bin_index <= value[1] and value[0] <= end_bin_index <= value[1]:
-                    label = key
-                    break
-                elif value[0] < start_bin_index < value[1] or value[0] < end_bin_index < value[1]:
-                    label = key * (-1)
-                    break
 
-            out.write("{} {}\n".format(i + 1, label))
+                if (value[1] - value[0]) < 50000:
+                    continue
+
+                if value[0] <= start_bin_index <= value[1] and value[0] <= end_bin_index <= value[1]:
+                    label.append(key)
+                    # break
+                elif value[0] < start_bin_index < value[1] or value[0] < end_bin_index < value[1]:
+                    # label = key * (-1)
+                    label.append(key)
+                    # break
+
+            if len(label) == 0:
+                out.write("{} {}\n".format(i + 1, 0))
+            else:
+                out.write("{}".format(i + 1))
+                for j in label:
+                    out.write(" {}".format(j))
+                out.write("\n")
+
         out.close()
 
 

@@ -2,6 +2,7 @@ import numpy as np
 from sklearn.manifold import TSNE
 import matplotlib.pyplot as plt
 import sys
+from collections import defaultdict
 
 
 def main():
@@ -24,7 +25,7 @@ def main():
 
         # print(top_domains_map)
 
-        label_file = "output/domain-data/chrm/10kb-bin-labels/" + chrm + "-bin-labels.txt"
+        label_file = "output/domain-data/chrm/50kb-bin-labels/" + chrm + "-bin-labels.txt"
 
         label_map = {}
 
@@ -32,18 +33,25 @@ def main():
             for line in f:
                 splitLine = line.split()
 
-                bin = int(splitLine[0])
-                label = abs(int(splitLine[1]))
+                bin_n = int(splitLine[0])
+                label = [abs(int(splitLine[1]))]
+                if len(splitLine) > 2:
+                    label.append(abs(int(splitLine[2])))
 
-                if label in top_domains_map:
-                    label_map[bin] = top_domains_map[label]
+                if label[0] in top_domains_map:
+                    label_map[bin_n] = top_domains_map[label[0]]
+                elif len(label) > 1:
+                    if label[1] in top_domains_map:
+                        label_map[bin_n] = top_domains_map[label[1]]
+                    else:
+                        label_map[bin_n] = "grey"
                 else:
-                    label_map[bin] = "grey"
+                    label_map[bin_n] = "grey"
 
         # print(label_map)
 
-        # tSNE_output = "output/10kb_resolution_intrachromosomal/line-output-128/tSNE/" + chrm + "-tSNE.txt"
-        tSNE_output = "output/10kb_resolution_intrachromosomal/deepwalk-output-128/tSNE/" + chrm + "-tSNE.txt"
+        # tSNE_output = "output/50kb_resolution_intrachromosomal/line-output-128/tSNE/" + chrm + "-tSNE.txt"
+        tSNE_output = "output/50kb_resolution_intrachromosomal/deepwalk-output-128/tSNE/" + chrm + "-tSNE.txt"
 
         X = []
         Y = []
@@ -62,8 +70,8 @@ def main():
         plt.scatter(X, Y, color=col)
         # plt.show()
 
-        # plt.savefig("output/graphs-10kb-128dim/line/" + chrm + ".png")
-        plt.savefig("output/graphs-10kb-128dim/deepwalk/" + chrm + ".png")
+        # plt.savefig("output/graphs-50kb-128dim/line/" + chrm + ".png")
+        plt.savefig("output/graphs-50kb-128dim/deepwalk/" + chrm + ".png")
 
 
 if __name__ == '__main__':

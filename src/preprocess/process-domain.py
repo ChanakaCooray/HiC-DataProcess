@@ -9,7 +9,6 @@ from collections import defaultdict
 
 def main():
     domain_file = "metadata/GSE63525_GM12878_primary+replicate_Arrowhead_domainlist.txt"
-    # bin_size = 10000
 
     output_dir = "output/domain-data/chrm/original"
     output_dir_merged = "output/domain-data/chrm/merged"
