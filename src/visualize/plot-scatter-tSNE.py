@@ -50,8 +50,8 @@ def main():
 
         # print(label_map)
 
-        tSNE_output = "output/100kb_resolution_intrachromosomal/line-output-2/" + chrm + ".emb"
-        # tSNE_output = "output/100kb_resolution_intrachromosomal/deepwalk-output-2/tSNE/" + chrm + "-tSNE.txt"
+        # tSNE_output = "output/100kb_resolution_intrachromosomal/line-output-128/tSNE/" + chrm + "-tSNE.txt"
+        tSNE_output = "output/100kb_resolution_intrachromosomal/deepwalk-output-128/tSNE/" + chrm + "-tSNE.txt"
         # tSNE_output = "output/100kb_resolution_intrachromosomal/chr22-dim2.emb"
 
         X = []
@@ -59,7 +59,6 @@ def main():
         col = []
 
         with open(tSNE_output) as f:
-            next(f)
             for line in f:
                 splitLine = line.split()
 
@@ -70,11 +69,11 @@ def main():
 
         plt.figure(figsize=(20, 12))
         plt.scatter(X, Y, color=col)
-        # plt.show()
+        plt.show()
 
         # sys.exit(0)
 
-        plt.savefig("output/graphs-100kb-2dim/" + chrm + ".png")
+        plt.savefig("output/graphs-100kb-128dim/line/" + chrm + ".png")
         # plt.savefig("output/graphs-100kb-128dim/deepwalk/" + chrm + ".png")
 
 
