@@ -25,7 +25,7 @@ def main():
 
         # print(top_domains_map)
 
-        label_file = "output/domain-data/chrm/100kb-bin-labels/" + chrm + "-bin-labels.txt"
+        label_file = "output/domain-data/chrm/50kb-bin-labels/" + chrm + "-bin-labels.txt"
 
         label_map = {}
 
@@ -50,10 +50,8 @@ def main():
 
         # print(label_map)
 
-        tSNE_output_1 = "output/100kb_resolution_intrachromosomal/deepwalk-output-2/" + chrm + ".emb"
-        tSNE_output_2 = "output/100kb_resolution_intrachromosomal/line-output-2/" + chrm + ".emb"
-        # tSNE_output = "output/100kb_resolution_intrachromosomal/deepwalk-output-2/tSNE/" + chrm + "-tSNE.txt"
-        # tSNE_output = "output/100kb_resolution_intrachromosomal/chr22-dim2.emb"
+        tSNE_output_1 = "output/50kb_resolution_intrachromosomal/deepwalk-output-2/" + chrm + ".emb"
+        tSNE_output_2 = "output/50kb_resolution_intrachromosomal/line-output-2/" + chrm + ".emb"
 
         X1 = []
         Y1 = []
@@ -90,7 +88,7 @@ def main():
         sub1.set_ylabel('Second Dimension')
         sub1.scatter(X1, Y1,color=col1,s=10)
         sub2 = fig.add_subplot(122)
-        sub2.set_title('Line\'s Embeddings')
+        sub2.set_title('LINE\'s Embeddings')
         sub2.set_xlabel('First Dimension')
         sub2.set_ylabel('Second Dimension')
         sub2.scatter(X2, Y2,color=col2,s=10)
@@ -100,8 +98,7 @@ def main():
         # plt.scatter(X1, Y1, color=col1)
         # plt.show()
 
-        plt.savefig("output/graphs-100kb-2dim/" + chrm + ".png")
-        # plt.savefig("output/graphs-100kb-128dim/deepwalk/" + chrm + ".png")
+        plt.savefig("output/graphs-50kb-2dim/" + chrm + ".png")
 
 
 if __name__ == '__main__':

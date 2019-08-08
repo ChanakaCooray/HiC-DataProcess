@@ -52,8 +52,6 @@ def main():
 
         tSNE_output_1 = "output/100kb_resolution_intrachromosomal/deepwalk-output-128/tSNE/" + chrm + "-tSNE.txt"
         tSNE_output_2 = "output/100kb_resolution_intrachromosomal/line-output-128/tSNE/" + chrm + "-tSNE.txt"
-        # tSNE_output = "output/100kb_resolution_intrachromosomal/deepwalk-output-2/tSNE/" + chrm + "-tSNE.txt"
-        # tSNE_output = "output/100kb_resolution_intrachromosomal/chr22-dim2.emb"
 
         X1 = []
         Y1 = []
@@ -90,7 +88,7 @@ def main():
         sub1.set_ylabel('Second Dimension of tSNE')
         sub1.scatter(X1, Y1,color=col1,s=10)
         sub2 = fig.add_subplot(122)
-        sub2.set_title('Line\'s Embeddings')
+        sub2.set_title('LINE\'s Embeddings')
         sub2.set_xlabel('First Dimension of tSNE')
         sub2.set_ylabel('Second Dimension of tSNE')
         sub2.scatter(X2, Y2,color=col2,s=10)
@@ -101,7 +99,6 @@ def main():
         # plt.show()
 
         plt.savefig("output/graphs-100kb-128dim/" + chrm + ".png")
-        # plt.savefig("output/graphs-100kb-128dim/deepwalk/" + chrm + ".png")
 
 
 if __name__ == '__main__':
