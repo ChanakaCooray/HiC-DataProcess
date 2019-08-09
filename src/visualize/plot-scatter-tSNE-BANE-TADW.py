@@ -12,6 +12,12 @@ def main():
     for chr_n in chrm_list:
         chrm = "chr" + str(chr_n)
 
+        if not (chr_n==13 or chr_n==18 or chr_n==19 or chr_n==20 or chr_n==22 or chr_n==22):
+            continue
+
+        # if not chr_n==21:
+        #     continue
+
         top_domains_file = "output/domain-data/chrm/top-domains/" + chrm + "-topdomains.txt"
 
         top_domains_map = {}
@@ -51,7 +57,7 @@ def main():
         # print(label_map)
 
         # tSNE_output = "output/100kb_resolution_intrachromosomal/line-output-128/tSNE/" + chrm + "-tSNE.txt"
-        tSNE_output = "output/50kb_resolution_intrachromosomal/deepwalk-output-128/tSNE/" + chrm + "-tSNE.txt"
+        tSNE_output = "output/50kb_resolution_intrachromosomal/BANE-output-64/tSNE/" + chrm + "-tSNE.txt"
         # tSNE_output = "output/100kb_resolution_intrachromosomal/chr22-dim2.emb"
 
         X = []
@@ -69,12 +75,14 @@ def main():
 
         plt.figure(figsize=(20, 12))
         plt.scatter(X, Y, color=col)
-        plt.show()
+        # plt.show()
 
         # sys.exit(0)
 
-        plt.savefig("output/graphs-50kb-128dim/BANE/" + chrm + ".png")
+        plt.savefig("output/graphs-50kb/BANE/" + chrm + "-dim64.png")
         # plt.savefig("output/graphs-100kb-128dim/deepwalk/" + chrm + ".png")
+
+
 
 
 if __name__ == '__main__':

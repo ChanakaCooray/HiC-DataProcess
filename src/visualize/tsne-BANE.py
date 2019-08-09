@@ -11,17 +11,19 @@ def main():
     for chr_n in chrm_list:
         chrm = "chr" + str(chr_n)
 
-        # if not (chr_n==13 or chr_n==18 or chr_n==19 or chr_n==20 or chr_n==22 or chr_n==22):
-        #     continue
-
-        if not chr_n == 21:
+        if not (chr_n==13 or chr_n==18 or chr_n==19 or chr_n==20 or chr_n==22 or chr_n==22):
             continue
 
+        # if not chr_n == 21:
+        #     continue
+
         # file = "output/100kb_resolution_intrachromosomal/line-output-128/" + chrm + ".emb"
-        file = "output/50kb_resolution_intrachromosomal/BANE-output-32/" + chrm + ".csv"
+        file = "output/50kb_resolution_intrachromosomal/BANE-output-64/" + chrm + ".csv"
+        # file = "output/50kb_resolution_intrachromosomal/TADW-output-128/" + chrm + ".csv"
 
         # tSNE_output = "output/100kb_resolution_intrachromosomal/line-output-128/tSNE/" + chrm + "-tSNE.txt"
-        tSNE_output = "output/50kb_resolution_intrachromosomal/BANE-output-32/tSNE/" + chrm + "-tSNE.txt"
+        tSNE_output = "output/50kb_resolution_intrachromosomal/BANE-output-64/tSNE/" + chrm + "-tSNE.txt"
+        # tSNE_output = "output/50kb_resolution_intrachromosomal/TADW-output-128/tSNE/" + chrm + "-tSNE.txt"
         out = open(tSNE_output, "w")
 
         bin_list_file = "output/50kb_resolution_intrachromosomal/bin-list/" + chrm + "-bins.txt"
@@ -34,7 +36,7 @@ def main():
         with open(file) as f:
             first_line = f.readline()
             # splitLine = first_line.split()
-            np_data = np.zeros(shape=(len(bin_list), 128))
+            np_data = np.zeros(shape=(len(bin_list), 64))
             index = 0
             for line in f:
                 splitLine = line.split(",")
