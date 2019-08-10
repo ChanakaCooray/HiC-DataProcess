@@ -12,8 +12,8 @@ def main():
     for chr_n in chrm_list:
         chrm = "chr" + str(chr_n)
 
-        if not (chr_n==13 or chr_n==18 or chr_n==19 or chr_n==20 or chr_n==22 or chr_n==22):
-            continue
+        # if not (chr_n==13 or chr_n==18 or chr_n==19 or chr_n==20 or chr_n==22 or chr_n==22):
+        #     continue
 
         # if not chr_n==21:
         #     continue
@@ -57,7 +57,7 @@ def main():
         # print(label_map)
 
         # tSNE_output = "output/100kb_resolution_intrachromosomal/line-output-128/tSNE/" + chrm + "-tSNE.txt"
-        tSNE_output = "output/50kb_resolution_intrachromosomal/BANE-output-64/tSNE/" + chrm + "-tSNE.txt"
+        tSNE_output = "output/50kb_resolution_intrachromosomal/TADW-output-128/tSNE/" + chrm + "-tSNE.txt"
         # tSNE_output = "output/100kb_resolution_intrachromosomal/chr22-dim2.emb"
 
         X = []
@@ -79,7 +79,7 @@ def main():
 
         # sys.exit(0)
 
-        plt.savefig("output/graphs-50kb/BANE/" + chrm + "-dim64.png")
+        plt.savefig("output/graphs-50kb/TADW/" + chrm + "-dim128.png")
         # plt.savefig("output/graphs-100kb-128dim/deepwalk/" + chrm + ".png")
 
 
