@@ -57,7 +57,8 @@ def main():
         # print(label_map)
 
         # tSNE_output = "output/100kb_resolution_intrachromosomal/line-output-128/tSNE/" + chrm + "-tSNE.txt"
-        tSNE_output = "output/50kb_resolution_intrachromosomal/TADW-output-128/tSNE/" + chrm + "-tSNE.txt"
+        # tSNE_output = "output/50kb_resolution_intrachromosomal/TADW-output-128/tSNE/" + chrm + "-tSNE.txt"
+        tSNE_output = "output/50kb_resolution_intrachromosomal/GAT2VEC-output-128/tSNE/" + chrm + "-tSNE.txt"
         # tSNE_output = "output/100kb_resolution_intrachromosomal/chr22-dim2.emb"
 
         X = []
@@ -79,7 +80,8 @@ def main():
 
         # sys.exit(0)
 
-        plt.savefig("output/graphs-50kb/TADW/" + chrm + "-dim128.png")
+        # plt.savefig("output/graphs-50kb/TADW/" + chrm + "-dim128.png")
+        plt.savefig("output/graphs-50kb/GAT2VEC/" + chrm + "-dim128.png")
         # plt.savefig("output/graphs-100kb-128dim/deepwalk/" + chrm + ".png")
 
 
