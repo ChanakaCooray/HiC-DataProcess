@@ -1,5 +1,5 @@
 import numpy as np
-from sklearn.manifold import TSNE
+# from sklearn.manifold import TSNE
 import matplotlib.pyplot as plt
 import sys
 from collections import defaultdict
@@ -12,7 +12,7 @@ def main():
     for chr_n in chrm_list:
         chrm = "chr" + str(chr_n)
 
-        top_domains_file = "output/domain-data/chrm/top-domains/" + chrm + "-topdomains.txt"
+        top_domains_file = "output/GM12878_replicate/domain-data/top-domains/" + chrm + "-topdomains.txt"
 
         top_domains_map = {}
         color_list = ["blue", "red", "green", "yellow", "orange"]
@@ -25,7 +25,7 @@ def main():
 
         # print(top_domains_map)
 
-        label_file = "output/domain-data/chrm/50kb-bin-labels/" + chrm + "-bin-labels.txt"
+        label_file = "output/GM12878_replicate/domain-data/50kb-bin-labels/" + chrm + "-bin-labels.txt"
 
         label_map = {}
 
@@ -50,8 +50,8 @@ def main():
 
         # print(label_map)
 
-        tSNE_output_1 = "output/50kb_resolution_intrachromosomal/deepwalk-output-2/" + chrm + ".emb"
-        tSNE_output_2 = "output/50kb_resolution_intrachromosomal/line-output-2/" + chrm + ".emb"
+        tSNE_output_1 = "output/GM12878_replicate/50kb_resolution_intrachromosomal/deepwalk-output-2/" + chrm + ".emb"
+        tSNE_output_2 = "output/GM12878_replicate/50kb_resolution_intrachromosomal/line-output-2/" + chrm + ".emb"
 
         X1 = []
         Y1 = []
@@ -98,7 +98,7 @@ def main():
         # plt.scatter(X1, Y1, color=col1)
         # plt.show()
 
-        plt.savefig("output/graphs-50kb-2dim/" + chrm + ".png")
+        plt.savefig("output/GM12878_replicate/graphs-50kb-2dim/" + chrm + ".png")
 
 
 if __name__ == '__main__':

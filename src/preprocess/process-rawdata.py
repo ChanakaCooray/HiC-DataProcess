@@ -2,17 +2,18 @@ import sys
 
 
 def main():
-    chrm_list = list(range(1, 23))
+    # chrm_list = list(range(1, 23))
+    chrm_list = list(range(1, 20))
     chrm_list.append("X")
 
     for chr_n in chrm_list:
         chrm = "chr" + str(chr_n)
 
-        rawdata_file = "RAWdata/50kb_resolution_intrachromosomal/" + chrm + "/MAPQGE30/" + chrm + "_50kb.RAWobserved"
-        norm_file = "RAWdata/50kb_resolution_intrachromosomal/" + chrm + "/MAPQGE30/" + chrm + "_50kb.KRnorm"
+        rawdata_file = "RAWdata/CH12-LX/50kb_resolution_intrachromosomal/" + chrm + "/MAPQGE30/" + chrm + "_50kb.RAWobserved"
+        norm_file = "RAWdata/CH12-LX/50kb_resolution_intrachromosomal/" + chrm + "/MAPQGE30/" + chrm + "_50kb.KRnorm"
         bin_size = 50000
-        line_output_file = "output/50kb_resolution_intrachromosomal/line-input/" + chrm + ".output"
-        deepwalk_output_file = "output/50kb_resolution_intrachromosomal/deepwalk-input/" + chrm + ".output"
+        line_output_file = "output/CH12-LX/50kb_resolution_intrachromosomal/line-input/" + chrm + ".output"
+        deepwalk_output_file = "output/CH12-LX/50kb_resolution_intrachromosomal/deepwalk-input/" + chrm + ".output"
 
         line_out = open(line_output_file, "w")
         deepwalk_out = open(deepwalk_output_file, "w")

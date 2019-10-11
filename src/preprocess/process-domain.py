@@ -10,9 +10,9 @@ from collections import defaultdict
 def main():
     domain_file = "metadata/GSE63525_GM12878_primary+replicate_Arrowhead_domainlist.txt"
 
-    output_dir = "output/domain-data/chrm/original"
-    output_dir_merged = "output/domain-data/chrm/merged"
-    output_dir_mapped = "output/domain-data/chrm/mapped"
+    output_dir = "output/GM12878_replicate/domain-data/original"
+    output_dir_merged = "output/GM12878_replicate/domain-data/merged"
+    output_dir_mapped = "output/GM12878_replicate/domain-data/mapped"
 
     # list_range = []
 
@@ -121,7 +121,7 @@ def calculate_top_nonmerged_domains(chr, domain_merge_map, domain_map_internal):
             if len(top_domain_list) == 5:
                 break
 
-    top_domain_file = "output/domain-data/chrm/top-domains/chr" + chr + "-topdomains.txt"
+    top_domain_file = "output/GM12878_replicate/domain-data/top-domains/chr" + chr + "-topdomains.txt"
     out = open(top_domain_file, "w")
 
     for i in top_domain_list:
@@ -144,7 +144,7 @@ def calculate_top_merged_domains(chr, domain_merge_map, domain_map_internal):
             if len(top_domain_list) == 5:
                 break
 
-        top_domain_file = "output/domain-data/chrm/top-domains/chr" + chr + "-topdomains.txt"
+        top_domain_file = "output/GM12878_replicate/domain-data/top-domains/chr" + chr + "-topdomains.txt"
         out = open(top_domain_file, "w")
 
         for i in top_domain_list:
