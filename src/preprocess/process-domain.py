@@ -8,11 +8,11 @@ from collections import defaultdict
 
 
 def main():
-    domain_file = "metadata/GSE63525_GM12878_primary+replicate_Arrowhead_domainlist.txt"
+    domain_file = "metadata/GSE63525_CH12-LX_Arrowhead_domainlist.txt"
 
-    output_dir = "output/GM12878_replicate/domain-data/original"
-    output_dir_merged = "output/GM12878_replicate/domain-data/merged"
-    output_dir_mapped = "output/GM12878_replicate/domain-data/mapped"
+    output_dir = "output/CH12-LX/domain-data/original"
+    output_dir_merged = "output/CH12-LX/domain-data/merged"
+    output_dir_mapped = "output/CH12-LX/domain-data/mapped"
 
     # list_range = []
 
@@ -34,9 +34,11 @@ def main():
     for key, value in domain_map.items():
         value.sort(key=itemgetter(1))
 
-        out = open(os.path.join(output_dir, "chr" + key + "-domainlist.txt"), "w")
-        out2 = open(os.path.join(output_dir_merged, "chr" + key + "-domainlist-merged.txt"), "w")
-        out3 = open(os.path.join(output_dir_mapped, "chr" + key + "-domainlist-mapped.txt"), "w")
+        chrkey = key
+
+        out = open(os.path.join(output_dir, chrkey + "-domainlist.txt"), "w")
+        out2 = open(os.path.join(output_dir_merged, chrkey + "-domainlist-merged.txt"), "w")
+        out3 = open(os.path.join(output_dir_mapped, chrkey + "-domainlist-mapped.txt"), "w")
 
         length = int(value[-1][1] / 2500) + 2
         chrm_domain_list = [0] * length
@@ -121,7 +123,9 @@ def calculate_top_nonmerged_domains(chr, domain_merge_map, domain_map_internal):
             if len(top_domain_list) == 5:
                 break
 
-    top_domain_file = "output/GM12878_replicate/domain-data/top-domains/chr" + chr + "-topdomains.txt"
+    chrkey = chr
+
+    top_domain_file = "output/CH12-LX/domain-data/top-domains/" + chrkey + "-topdomains.txt"
     out = open(top_domain_file, "w")
 
     for i in top_domain_list:
@@ -144,7 +148,9 @@ def calculate_top_merged_domains(chr, domain_merge_map, domain_map_internal):
             if len(top_domain_list) == 5:
                 break
 
-        top_domain_file = "output/GM12878_replicate/domain-data/top-domains/chr" + chr + "-topdomains.txt"
+        chrkey = chr
+
+        top_domain_file = "output/CH12-LX/domain-data/top-domains/" + chrkey + "-topdomains.txt"
         out = open(top_domain_file, "w")
 
         for i in top_domain_list:

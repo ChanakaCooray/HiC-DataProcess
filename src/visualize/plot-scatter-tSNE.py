@@ -6,13 +6,13 @@ from collections import defaultdict
 
 
 def main():
-    chrm_list = list(range(1, 23))
+    chrm_list = list(range(1, 20))
     chrm_list.append("X")
 
     for chr_n in chrm_list:
         chrm = "chr" + str(chr_n)
 
-        top_domains_file = "output/domain-data/chrm/top-domains/" + chrm + "-topdomains.txt"
+        top_domains_file = "output/CH12-LX/domain-data/top-domains/" + chrm + "-topdomains.txt"
 
         top_domains_map = {}
         color_list = ["blue", "red", "green", "yellow", "orange"]
@@ -25,7 +25,7 @@ def main():
 
         # print(top_domains_map)
 
-        label_file = "output/domain-data/chrm/50kb-bin-labels/" + chrm + "-bin-labels.txt"
+        label_file = "output/CH12-LX/domain-data/50kb-bin-labels/" + chrm + "-bin-labels.txt"
 
         label_map = {}
 
@@ -51,7 +51,7 @@ def main():
         # print(label_map)
 
         # tSNE_output = "output/100kb_resolution_intrachromosomal/line-output-128/tSNE/" + chrm + "-tSNE.txt"
-        tSNE_output = "output/50kb_resolution_intrachromosomal/deepwalk-output-128/tSNE/" + chrm + "-tSNE.txt"
+        tSNE_output = "output/CH12-LX/50kb_resolution_intrachromosomal/deepwalk-output-128/tSNE/" + chrm + "-tSNE.txt"
         # tSNE_output = "output/100kb_resolution_intrachromosomal/chr22-dim2.emb"
 
         X = []
@@ -73,7 +73,7 @@ def main():
 
         # sys.exit(0)
 
-        plt.savefig("output/graphs-50kb-128dim/BANE/" + chrm + ".png")
+        plt.savefig("output/CH12-LX/graphs-50kb-128dim-rmdiag-20dist" + chrm + ".png")
         # plt.savefig("output/graphs-100kb-128dim/deepwalk/" + chrm + ".png")
 
 

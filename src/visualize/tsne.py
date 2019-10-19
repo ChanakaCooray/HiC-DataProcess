@@ -4,19 +4,19 @@ import matplotlib.pyplot as plt
 import sys
 
 
-def main():
-    chrm_list = list(range(1, 23))
+def process_tsne():
+    chrm_list = list(range(1, 20))
     chrm_list.append("X")
 
     for chr_n in chrm_list:
         chrm = "chr" + str(chr_n)
-        # file = "output/100kb_resolution_intrachromosomal/line-output-128/" + chrm + ".emb"
+        file = "output/CH12-LX/50kb_resolution_intrachromosomal/deepwalk-output-128/" + chrm + ".emb"
         # file = "output/100kb_resolution_intrachromosomal/deepwalk-output-128/" + chrm + ".emb"
-        file = "output/50kb_resolution_intrachromosomal/GAT2VEC-output-128/" + chrm + "_gat2vec.emb"
+        # file = "output/50kb_resolution_intrachromosomal/GAT2VEC-output-128/" + chrm + "_gat2vec.emb"
 
-        # tSNE_output = "output/100kb_resolution_intrachromosomal/line-output-128/tSNE/" + chrm + "-tSNE.txt"
+        tSNE_output = "output/CH12-LX/50kb_resolution_intrachromosomal/deepwalk-output-128/tSNE/" + chrm + "-tSNE.txt"
         # tSNE_output = "output/100kb_resolution_intrachromosomal/deepwalk-output-128/tSNE/" + chrm + "-tSNE.txt"
-        tSNE_output = "output/50kb_resolution_intrachromosomal/GAT2VEC-output-128/tSNE/" + chrm + "-tSNE.txt"
+        # tSNE_output = "output/50kb_resolution_intrachromosomal/GAT2VEC-output-128/tSNE/" + chrm + "-tSNE.txt"
         out = open(tSNE_output, "w")
 
         bin_list = []
@@ -58,4 +58,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    process_tsne()

@@ -11,7 +11,7 @@ def main():
     bin_size = 50000
     # num_bins = 24950
 
-    chrm_list = list(range(1, 23))
+    chrm_list = list(range(1, 20))
     chrm_list.append("X")
 
     print(chrm_list)
@@ -19,14 +19,14 @@ def main():
     for chr_n in chrm_list:
         chrm = "chr" + str(chr_n)
 
-        KRNorm_file = "RAWdata/GM12878_replicate/50kb_resolution_intrachromosomal/" + chrm + "/MAPQGE30/" + chrm + "_50kb.KRnorm"
+        KRNorm_file = "RAWdata/CH12-LX/50kb_resolution_intrachromosomal/" + chrm + "/MAPQGE30/" + chrm + "_50kb.KRnorm"
 
         num_bins = sum(1 for line in open(KRNorm_file))
 
-        domain_file = "output/GM12878_replicate/domain-data/merged/" + chrm + "-domainlist-merged.txt"
+        domain_file = "output/CH12-LX/domain-data/merged/" + chrm + "-domainlist-merged.txt"
 
-        output_file = "output/GM12878_replicate/domain-data/50kb-bin-labels/" + chrm + "-bin-labels.txt"
-        output_file_domain = "output/GM12878_replicate/domain-data/50kb-bin-labels/domain-list/" + chrm + "-domains.txt"
+        output_file = "output/CH12-LX/domain-data/50kb-bin-labels/" + chrm + "-bin-labels.txt"
+        output_file_domain = "output/CH12-LX/domain-data/50kb-bin-labels/domain-list/" + chrm + "-domains.txt"
 
         out = open(output_file, "w")
         out_domain = open(output_file_domain, "w")
