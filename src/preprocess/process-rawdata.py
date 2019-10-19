@@ -18,10 +18,42 @@ def main(data):
         line_out = open(line_output_file, "w")
         deepwalk_out = open(deepwalk_output_file, "w")
 
-        process_method1(rawdata_file,norm_file, bin_size, line_out, deepwalk_out)
+        process_method0(rawdata_file,norm_file, bin_size, line_out, deepwalk_out)
 
         line_out.close()
         deepwalk_out.close()
+
+def process_method0(rawdata_file, norm_file, bin_size, line_out, deepwalk_out):
+    i = 1
+    norm_map = {}
+    with open(norm_file) as f:
+        for line in f:
+            norm_map[i] = line.rstrip('\n')
+            i += 1
+
+    print(i)
+
+    count = 0
+    with open(rawdata_file) as f:
+        for line in f:
+            splitLine = line.split()
+
+            bin1 = int(splitLine[0])
+            bin2 = int(splitLine[1])
+            value = float(splitLine[2])
+
+            index1 = int((bin1 / bin_size) + 1)
+            index2 = int((bin2 / bin_size) + 1)
+
+            new_value = "NaN"
+            if norm_map[index1] != "NaN" and norm_map[index2] != "NaN":
+                new_value = value / (float(norm_map[index1]) * float(norm_map[index1]))
+
+            if new_value != "NaN":
+                line_out.write("{} {} {}\n".format(index1, index2, new_value))
+                deepwalk_out.write("{} {} {}\n".format(index1, index2, new_value))
+                if index1 != index2:
+                    line_out.write("{} {} {}\n".format(index2, index1, new_value))
 
 
 def process_method1(rawdata_file, norm_file, bin_size, line_out, deepwalk_out):

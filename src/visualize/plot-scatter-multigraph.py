@@ -118,7 +118,7 @@ def main(data):
         # plt.scatter(X1, Y1, color=col1)
         # plt.show()
 
-        plt.savefig("output/" + data + "/graphs-50kb-2dim-rmdiag-20dist/" + chrm + ".png")
+        plt.savefig("output/" + data + "/graphs-50kb-2dim/" + chrm + ".png")
 
 
 if __name__ == '__main__':
