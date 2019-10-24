@@ -4,7 +4,7 @@ from sklearn.manifold import TSNE
 
 
 def process_tsne(data, tool):
-    chrm_list = list(range(1, 20))
+    chrm_list = list(range(1, 23))
     chrm_list.append("X")
 
     for chr_n in chrm_list:
@@ -57,7 +57,7 @@ def process_tsne(data, tool):
 
 
 def plot_graph(data):
-    chrm_list = list(range(1, 20))
+    chrm_list = list(range(1, 23))
     chrm_list.append("X")
 
     for chr_n in chrm_list:
@@ -171,12 +171,13 @@ def plot_graph(data):
         # plt.scatter(X1, Y1, color=col1)
         # plt.show()
 
-        plt.savefig("output/" + data + "/graphs-50kb-128dim-rmdiag-20dist/" + chrm + ".png")
+        plt.savefig("output/" + data + "/graphs-50kb-128dim-rmdiag-median/" + chrm + ".png")
+        plt.close()
 
 
 if __name__ == '__main__':
-    process_tsne("CH12-LX", "deepwalk")
-    process_tsne("CH12-LX", "line")
-    process_tsne("CH12-LX", "node2vec")
+    process_tsne("GM12878_replicate", "deepwalk")
+    process_tsne("GM12878_replicate", "line")
+    process_tsne("GM12878_replicate", "node2vec")
 
-    plot_graph("CH12-LX")
+    plot_graph("GM12878_replicate")

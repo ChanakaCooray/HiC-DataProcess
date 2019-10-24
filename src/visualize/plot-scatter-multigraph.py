@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 
 def main(data):
-    chrm_list = list(range(1, 20))
+    chrm_list = list(range(1, 23))
     chrm_list.append("X")
 
     for chr_n in chrm_list:
@@ -108,8 +108,8 @@ def main(data):
 
         sub3 = fig.add_subplot(133)
         sub3.set_title('Node2vec\'s Embeddings')
-        sub3.set_xlabel('First Dimension of tSNE')
-        sub3.set_ylabel('Second Dimension of tSNE')
+        sub3.set_xlabel('First Dimension')
+        sub3.set_ylabel('Second Dimension')
         sub3.scatter(X3, Y3, color=col3, s=10)
 
         plt.tight_layout()
@@ -118,8 +118,8 @@ def main(data):
         # plt.scatter(X1, Y1, color=col1)
         # plt.show()
 
-        plt.savefig("output/" + data + "/graphs-50kb-2dim/" + chrm + ".png")
+        plt.savefig("output/" + data + "/graphs-50kb-2dim-rmdiag-20dist/" + chrm + ".png")
 
 
 if __name__ == '__main__':
-    main("CH12-LX")
+    main("GM12878_replicate")

@@ -3,7 +3,7 @@ import numpy as np
 
 def main(data):
     # chrm_list = list(range(1, 23))
-    chrm_list = list(range(1, 20))
+    chrm_list = list(range(1, 23))
     chrm_list.append("X")
 
     for chr_n in chrm_list:
@@ -18,7 +18,7 @@ def main(data):
         line_out = open(line_output_file, "w")
         deepwalk_out = open(deepwalk_output_file, "w")
 
-        process_method0(rawdata_file,norm_file, bin_size, line_out, deepwalk_out)
+        process_method2(rawdata_file,norm_file, bin_size, line_out, deepwalk_out)
 
         line_out.close()
         deepwalk_out.close()
@@ -148,4 +148,4 @@ def process_method2(rawdata_file, norm_file, bin_size, line_out, deepwalk_out):
 
 
 if __name__ == '__main__':
-    main("CH12-LX")
+    main("GM12878_replicate")
