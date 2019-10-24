@@ -148,4 +148,4 @@ def process_method2(rawdata_file, norm_file, bin_size, line_out, deepwalk_out):
 
 
 if __name__ == '__main__':
-    main("GM12878_replicate")
+    main("GM12878_primary")
