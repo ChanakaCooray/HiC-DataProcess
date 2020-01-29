@@ -1,14 +1,15 @@
-import matplotlib.pyplot as plt
-import networkx as nx
-import numpy as np
 import collections
 import os
 
+import matplotlib.pyplot as plt
+import networkx as nx
+
+
 # main func
 def main(data):
-    chrm_list = list(range(1, 23))
+    chrm_list = list(range(1, 2))
     # chrm_list = list(range(1, 2))
-    chrm_list.append("X")
+    # chrm_list.append("X")
 
     for chr_n in chrm_list:
         chrm = "chr" + str(chr_n)
@@ -17,7 +18,7 @@ def main(data):
         norm_file = "RAWdata/" + data + "/50kb_resolution_intrachromosomal/" + chrm + "/MAPQGE30/" + chrm + "_50kb.KRnorm"
         bin_size = 50000
 
-        process_method2(rawdata_file, norm_file, bin_size, data, chrm)
+        process_method0(rawdata_file, norm_file, bin_size, data, chrm)
 
 
 def process_method0(rawdata_file, norm_file, bin_size, data, chrm):
@@ -56,6 +57,7 @@ def process_method0(rawdata_file, norm_file, bin_size, data, chrm):
 
     draw_powerlaw_graph(G, data, "powerlaw-normalized-" + chrm)
 
+
 def isint(x):
     try:
         a = float(x)
@@ -65,9 +67,8 @@ def isint(x):
     else:
         return a == b
 
-def process_method2(rawdata_file, norm_file, bin_size, data, chrm):
 
-    # G = nx.Graph(name="Network")
+def process_method2(rawdata_file, norm_file, bin_size, data, chrm):
     network = {}
     count = 0
     with open(rawdata_file) as f:
@@ -84,10 +85,10 @@ def process_method2(rawdata_file, norm_file, bin_size, data, chrm):
             index1 = int((bin1 / bin_size) + 1)
             index2 = int((bin2 / bin_size) + 1)
 
-            # if index1==index2:
-            #     continue
+            if index1 == index2:
+                continue
 
-            count +=1
+            count += 1
 
             if index1 not in network:
                 network[index1] = int(value)
@@ -105,8 +106,7 @@ def process_method2(rawdata_file, norm_file, bin_size, data, chrm):
 
     draw_powerlaw_graph(network, data, "degree-" + chrm)
 
-
-def draw_powerlaw_graph(network, data, graph):
+def draw_powerlaw_graph(G, data, graph):
     # degree_centrality = nx.degree_centrality(G)
 
     # print(degree_centrality)
@@ -117,7 +117,7 @@ def draw_powerlaw_graph(network, data, graph):
     # print(np.mean(degrees))
     # plt.hist(degrees, bins=int(len(degrees)/100))
 
-    # degree_sequence = sorted([d for n, d in G.degree()], reverse=True)  # degree sequence
+    degree_sequence = sorted([d for n, d in G.degree()], reverse=True)  # degree sequence
     # print "Degree sequence", degree_sequence
     # degree_centrality = sorted(degree_centrality, reverse=True)
     # degreeCount = collections.Counter(degree_centrality)
@@ -127,10 +127,10 @@ def draw_powerlaw_graph(network, data, graph):
     # print(len(degree_sequence))
     # print(sum(degree_sequence))
 
-    degreeCount = collections.Counter(network.values())
+    degreeCount = collections.Counter(degree_sequence)
     deg, cnt = zip(*degreeCount.items())
     # deg, cnt = zip(*network.items())
-    plt.scatter(deg,cnt, s=2)
+    plt.scatter(deg, cnt, s=2)
 
     # plt.show()
 
@@ -157,10 +157,69 @@ def draw_powerlaw_graph(network, data, graph):
     # fig2 = fit.plot_pdf(color='b', linewidth=2)
     # fit.power_law.plot_pdf(color='b', linestyle='-', ax=fig2)
 
-    # plt.show()
+    plt.show()
+    #
+    # plt.savefig(os.path.join("output/{}/powerlaw-distance-graphs/degree-histogram/without-diagonal".format(data),
+    #                          "{}.png".format(graph)))
+    # plt.clf()
 
-    plt.savefig(os.path.join("output/{}/powerlaw-distance-graphs/degree-histogram/with-diagonal".format(data), "{}.png".format(graph)))
-    plt.clf()
+
+# def draw_powerlaw_graph(network, data, graph):
+#     # degree_centrality = nx.degree_centrality(G)
+#
+#     # print(degree_centrality)
+#
+#     # degree_sequence = [G.degree(n) for n in G.nodes()]
+#     # print(len(degrees))
+#     # print(sum(degrees))
+#     # print(np.mean(degrees))
+#     # plt.hist(degrees, bins=int(len(degrees)/100))
+#
+#     # degree_sequence = sorted([d for n, d in G.degree()], reverse=True)  # degree sequence
+#     # print "Degree sequence", degree_sequence
+#     # degree_centrality = sorted(degree_centrality, reverse=True)
+#     # degreeCount = collections.Counter(degree_centrality)
+#
+#     # degree_sequence = sorted([d for n, d in G.degree()], reverse=True)  # degree sequence
+#
+#     # print(len(degree_sequence))
+#     # print(sum(degree_sequence))
+#
+#     degreeCount = collections.Counter(network.values())
+#     deg, cnt = zip(*degreeCount.items())
+#     # deg, cnt = zip(*network.items())
+#     plt.scatter(deg, cnt, s=2)
+#
+#     # plt.show()
+#
+#     # degree_centrality = nx.degree_centrality(G)
+#     #
+#     # print(len(degree_centrality.values()))
+#
+#     # fit = powerlaw.Fit(list(degree_centrality.values()))
+#
+#     # powerlaw.plot_pdf(list(degree_centrality.values()), linear_bins=True, color='r')
+#     # fig2 = fit.plot_pdf(color='b', linewidth=2)
+#     # fit.power_law.plot_pdf(color='b', linestyle='--', ax=fig2)
+#     # fit.plot_ccdf(color='r', linewidth=2, ax=fig2)
+#     # fit.power_law.plot_ccdf(color='r', linestyle='--', ax=fig2)
+#
+#     # results.power_law.plot_pdf(color='b', linestyle='--')
+#     # results.plot_pdf(color='b')
+#
+#     # print('alpha = ', results.power_law.alpha, '  sigma = ', results.power_law.sigma)
+#
+#     plt.xlabel("Degree")
+#     plt.ylabel("Frequency")
+#
+#     # fig2 = fit.plot_pdf(color='b', linewidth=2)
+#     # fit.power_law.plot_pdf(color='b', linestyle='-', ax=fig2)
+#
+#     # plt.show()
+#
+#     plt.savefig(os.path.join("output/{}/powerlaw-distance-graphs/degree-histogram/without-diagonal".format(data),
+#                              "{}.png".format(graph)))
+#     plt.clf()
 
 
 if __name__ == '__main__':

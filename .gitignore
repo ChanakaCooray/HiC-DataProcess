@@ -18,3 +18,4 @@ Job_*.e*
 Job_*.o*
 RAWdata
 *-input/
+hic-lib
