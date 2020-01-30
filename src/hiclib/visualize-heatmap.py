@@ -19,8 +19,9 @@ def main(type):
         np_arr = np.array(contact_matrix)
         # np.fill_diagonal(np_arr, 0)
 
-        plt.imshow(np.clip(np.log(np_arr), a_min=0, a_max=np.inf), cmap='Reds')
-        # plt.imshow(np_arr, cmap='Reds')
+        # plt.imshow(np.clip(np.log(np_arr), a_min=0, a_max=np.inf), cmap='Reds')
+        plt.imshow(np.log(np_arr), cmap='Reds')
+        # plt.imshow(np.clip(np_arr, a_min=0, a_max=10), cmap='Reds')
         # plt.imshow(np.log(np_arr), cmap='Reds')
         plt.colorbar()
 
