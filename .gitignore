@@ -19,3 +19,5 @@ Job_*.o*
 RAWdata
 *-input/
 hic-lib
+HiCLib-res
+HiC-RAW
