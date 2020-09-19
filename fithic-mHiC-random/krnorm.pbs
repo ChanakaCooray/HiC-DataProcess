@@ -1,0 +1,18 @@
+#!/bin/bash
+#PBS -q default
+#PBS -N J_process_mhic
+##serial jobs: only 1 processor core is requested
+#PBS -l select=1:mem=16gb:ncpus=1
+#PBS -l walltime=08:00:00
+##replace "x-ccast-prj" below with "x-ccast-prj-[your sponsor's project group]"
+#PBS -W group_list=x-ccast-prj-luliu
+#
+#
+cd $PBS_O_WORKDIR
+#
+##change the input filename if needed
+
+source activate res27env
+./krnorm.sh
+#
+exit 0
