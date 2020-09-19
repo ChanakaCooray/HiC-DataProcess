@@ -1,35 +1,59 @@
 import h5py
+import numpy as np
 
 
-def main():
-    filename = '/Users/bcchanaka/PycharmProjects/HiC-DataProcess/HiCLib-res/contact-maps/heatmap-res-1M.hdf5'
+def main(name, type):
+    filename = '/Users/bcchanaka/PycharmProjects/HiC-DataProcess/Contact-Matrix/' + type + '/' + name + '-heatmap-res-40k.hdf5'
+    # output_file = '/Users/bcchanaka/PycharmProjects/HiC-DataProcess/Contact-Matrix/Original/hESC-r1-40k.npy'
+    resolution = 40000
 
     with h5py.File(filename, 'r') as f:
-        # List all groups
-        print("Keys: %s" % f.keys())
         a = (f.get(list(f)[4]))
-        # print(a)
-        n1 = f.get(list(f)[1])
-        print(type(a))
 
-        total_inter = 0
-        for i in range(0, a.shape[0]):
-            for j in range(0, a.shape[1]):
-                total_inter += a[i][j]
-                # print(a[i][j])
+        bin_start = f.get(list(f)[1])
 
-        print(total_inter)
+        np_bin_starts = np.array(bin_start)
 
-        # print(f[list(f)[1]])
-        # a_group_key = list(f.keys())[0]
+        np_arr = np.array(a)
+        np_arr = np_arr[0:77021, 0:77021]
 
-        # Get the data
-        # data = list(f[a_group_key])
+        a_triu = np.triu(np_arr, k=0)
 
-        # print(data)
+        print("line count: " + name + " " + type + " " + str(np.count_nonzero(a_triu)))
+
+        print("total: " + name + " " + type + " " + str(np.sum(a_triu)))
+
+        # mat = np.empty(shape=(np_arr.shape[0], 2))
+        # chr_arr = []
+
+        # for i in range(0, np_arr.shape[0]):
+        #     chr = np.searchsorted(np_bin_starts, i, side='right')
+        #
+        #     if chr == 23:
+        #         chr_str = 'chrX'
+        #     elif chr == 24:
+        #         chr_str = 'chrY'
+        #     elif chr == 25:
+        #         chr_str = 'chrM'
+        #     else:
+        #         chr_str = 'chr' + str(chr)
+        #
+        #     chr_arr.append(chr_str)
+        #     mat[i, 0] = i * resolution
+        #     mat[i, 1] = mat[i, 0] + resolution
+        #
+        # chr_np = np.array(chr_arr)
+        # chr_np = np.reshape(chr_np, (chr_np.shape[0], 1))
+        # mat_2 = np.concatenate((chr_np,mat),1)
+        # final_mat = np.append(mat_2, np_arr, 1)
+
+        # np.save(output_file, final_mat)
+        # np.savetxt(output_file+".txt",final_mat,fmt='%s')
+
+        # np.savetxt(output_file+'.txt', final_mat, delimiter=" ", fmt="%s")
 
 
 if __name__ == '__main__':
-    main()
-
-# Keys: [u'_self_key', u'chrms1', u'chrms2', u'cuts1', u'cuts2', u'downrsites1', u'downrsites2', u'misc', u'rfragIdxs1', u'rfragIdxs2', u'rsites1', u'rsites2', u'strands1', u'strands2', u'uprsites1', u'uprsites2']
+    for i in ('IMR90-r1',):
+        for j in ('Original', 'Merged'):
+            main(i, j)

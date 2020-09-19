@@ -1,9 +1,9 @@
 from collections import defaultdict
-import numpy as np
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
+import bisect
 
 def main():
-    parser = ArgumentParser("EdgeDetector",
+    parser = ArgumentParser("Process-ambi",
                             formatter_class=ArgumentDefaultsHelpFormatter,
                             conflict_handler='resolve')
     parser.add_argument("--input", default='None')
@@ -108,7 +108,7 @@ def get_fragment_diff(read, fragment_dic):
     #         print("Close fragments: "+str(prev_idx)+" "+str(next_idx))
     #         break
 
-    idx = np.searchsorted(fragments, read_value, side='left')
+    idx = bisect.bisect_left(fragments, read_value)
 
     if idx == 0:
         fragment_index_diff = fragments[idx] - read_value
